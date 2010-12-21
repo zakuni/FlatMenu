@@ -6,20 +6,29 @@
 </head> 
  
 <body>
+
+<form id="position"> 
+x <input type="text" value="" name="scrollX" /><br>
+y <input type="text" value="" name="scrollY" /><br>
+a <input type="text" value="" name="scrollA" /><br>
+b <input type="text" value="" name="scrollB" />
+</form> 
 <button onclick="scroll()">スクロール</button>
 <br>
 
-<iframe id="inf" src="content.html" height=300 width=300>
+
+<br><br>
+<iframe id="menu" src="menu.html" width=18%>
+iframe対応ブラウザでみてください
+</iframe>
+
+<iframe id="content" src="content.html" width=80%>
 この部分は iframe 対応のブラウザで見てください。
 </iframe>
 
-<form id="position" > 
-<br><br><br><br><br><br><br><br><br>
 
-x <input type="text" value="" name="scrollX" /><br>
-y <input type="text" value="" name="scrollY" />
 
-</form> 
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <script> 
@@ -29,7 +38,8 @@ function setPosition() {
 	
 	target.scrollX.value    = getScrollPosition().x;
 	target.scrollY.value    = getScrollPosition().y;
-
+	target.scrollA.value    = getScrollPosition().a;
+	target.scrollB.value    = getScrollPosition().b;
  
 	setTimeout( function(){setPosition()},100 );
 }
@@ -40,17 +50,25 @@ function getScrollPosition() {
  
 	obj.x = document.documentElement.scrollLeft || document.body.scrollLeft;
 	obj.y = document.documentElement.scrollTop  || document.body.scrollTop;
-
+	obj.a = frames[0].document.documentElement.scrollLeft || frames[0].document.body.scrollLeft;
+	obj.b = frames[0].document.documentElement.scrollTop  || frames[0].document.body.scrollTop;
+        if(obj.b > 100){
+          window.frames[1].scrollTo(0, 100);
+        }
+        else{
+          window.frames[1].scrollTo(0, 0);
+        }
 	return obj;
 }
 
 
 function scroll(){
+  target = document.getElementById('btn');
   //window.scrollTo(0,20);
   //window.location.replace("#top");
   //window.scrollIntoView();
   //document.getElementById("koko").scrollIntoView(true);
-  window.frames[0].scrollTo(0,20);
+  window.frames[1].scrollTo(getScrollPosition().a, getScrollPosition().b);
 
 } 
  
