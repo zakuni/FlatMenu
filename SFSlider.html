@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>スクロールバーの位置を取得</title> 
+  <title>SFSlider</title> 
 </head> 
  
 <body>
-
+<button onclick="scroll()">スクロール</button>
 <form id="position" > 
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -37,7 +37,15 @@ function getScrollPosition() {
 
 	return obj;
 }
- 
+
+
+function scroll(){
+  window.scrollTo(0,20);
+  //window.location.replace("#top");
+  //window.scrollIntoView();
+  //document.getElementById("koko").scrollIntoView(true);
+
+} 
  
 setPosition();
  
