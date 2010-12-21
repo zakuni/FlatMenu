@@ -1,0 +1,29 @@
+<html>
+
+<body>
+aaa<br>
+bbb<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<a name="top">トップ</a>
+<br><br id="koko">
+ああ
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<a href="#top">Top</a>
+
+<button onclick="scroll()">スクロール</button> 
+
+
+<script type="text/javascript"> 
+function scroll(){
+  //window.location.hash("#top"); //これは何故か使えない
+  //window.scrollTo(0,20);
+  //window.location.replace("#top");
+  //window.scrollIntoView();
+  document.getElementById("koko").scrollIntoView(true);
+
+}
+</script> 
+</body>
+
+
+</html>
