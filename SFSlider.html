@@ -8,9 +8,11 @@
 <body>
 <button onclick="scroll()">スクロール</button>
 <br>
-<iframe src="content.html" height=300 width=300>
+
+<iframe id="inf" src="content.html" height=300 width=300>
 この部分は iframe 対応のブラウザで見てください。
 </iframe>
+
 <form id="position" > 
 <br><br><br><br><br><br><br><br><br>
 
@@ -19,8 +21,8 @@ y <input type="text" value="" name="scrollY" />
 
 </form> 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<script> 
 
+<script> 
  
 function setPosition() {
 	target = document.getElementById('position');
@@ -44,10 +46,11 @@ function getScrollPosition() {
 
 
 function scroll(){
-  window.scrollTo(0,20);
+  //window.scrollTo(0,20);
   //window.location.replace("#top");
   //window.scrollIntoView();
   //document.getElementById("koko").scrollIntoView(true);
+  window.frames[0].scrollTo(0,20);
 
 } 
  
