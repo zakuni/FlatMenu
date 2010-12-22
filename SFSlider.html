@@ -43,104 +43,85 @@
     <script>
 
       function getMousePosition(e) {
-      var mouse = new Object();
-      
-      if(e) {
-      mouse.x = e.pageX;
-      mouse.y = e.pageY;
-      }
-      else {
-      mouse.x = event.x + document.body.scrollLeft;
-      mouse.y = event.y + document.body.scrollTop;
-      }
-      
-      return mouse;
+        var mouse = new Object();      
+          if(e) {
+            mouse.x = e.pageX;
+            mouse.y = e.pageY;
+          }
+        else {
+          mouse.x = event.x + document.body.scrollLeft;
+          mouse.y = event.y + document.body.scrollTop;
+        }      
+        return mouse;
       }
 
 
       function setMouseDownPosition(){
-      mouseposition = document.getElementById('mouseposition');
-      frames[0].onmousedown = function(e){
-      mouseposition.mousedownX.value = getMousePosition(e).x;
-      mouseposition.mousedownY.value = getMousePosition(e).y;
-      }
+        mouseposition = document.getElementById('mouseposition');
+        frames[0].onmousedown = function(e){
+          mouseposition.mousedownX.value = getMousePosition(e).x;
+          mouseposition.mousedownY.value = getMousePosition(e).y;
+        }
       }
       
       setMouseDownPosition();
       
       function setScroll(){
-      mouseposition = document.getElementById('mouseposition');
-      frames[0].onmousemove = function(e){
-      mouseposition.onmouseX.value = getMousePosition(e).x;
-      mouseposition.onmouseY.value = getMousePosition(e).y;
+        mouseposition = document.getElementById('mouseposition');
+        frames[0].onmousemove = function(e){
+          mouseposition.onmouseX.value = getMousePosition(e).x;
+          mouseposition.onmouseY.value = getMousePosition(e).y;
+        }
       }
-      }
+    
       setScroll();
       
       function resetScroll(){
-      scrollX = 0;
-      scrollY = 0;
+        scrollX = 0;
+        scrollY = 0;
       }
       
       function getMS(theEvent){ console.log("マウスのボタンがクリックされたよ");}
       window.captureEvents(Event.CLICK);
       frames[0].onclick = getMS;
       
-      //window.onMouseUp = alert("hah");
-      //Window.onClick = alert("click");
-      //window.onMouseUp = mouseup();
-      //window.onMouseDown = mousedown();
-      //frames[0].onMouseDown = mousedown();
-      //frames[0].onMouseUp = mouseup();
-      //window.onMouseOver = mousedown;
-      function mousedown(){
-      // alert("mousedown event detected!");
-      console.log("aa");
-      }
-      
-      function mouseup(){
-      // alert("mouse up!");
-      console.log("bb");
-      }
-      
       
       function setPosition() {
-      target = document.getElementById('position');
+        target = document.getElementById('position');
       
-      target.scrollX.value    = getScrollPosition().x;
-      target.scrollY.value    = getScrollPosition().y;
-      target.scrollA.value    = getScrollPosition().a;
-      target.scrollB.value    = getScrollPosition().b;
+        target.scrollX.value    = getScrollPosition().x;
+        target.scrollY.value    = getScrollPosition().y;
+        target.scrollA.value    = getScrollPosition().a;
+        target.scrollB.value    = getScrollPosition().b;
       
-      setTimeout( function(){setPosition()},100 );
+        setTimeout( function(){setPosition()},100 );
       }
       
       
       function getScrollPosition() {
-      var obj = new Object();
+        var obj = new Object();
       
-      obj.x = document.documentElement.scrollLeft || document.body.scrollLeft;
-      obj.y = document.documentElement.scrollTop  || document.body.scrollTop;
-      obj.a = frames[0].document.documentElement.scrollLeft || frames[0].document.body.scrollLeft;
-      obj.b = frames[0].document.documentElement.scrollTop  || frames[0].document.body.scrollTop;
-      if(obj.b > 50){
-      window.frames[1].scrollTo(0, 50);
-      }
-      else{
-      window.frames[1].scrollTo(0, 0);
-      }
-      return obj;
+        obj.x = document.documentElement.scrollLeft || document.body.scrollLeft;
+        obj.y = document.documentElement.scrollTop  || document.body.scrollTop;
+        obj.a = frames[0].document.documentElement.scrollLeft || frames[0].document.body.scrollLeft;
+        obj.b = frames[0].document.documentElement.scrollTop  || frames[0].document.body.scrollTop;
+        if(obj.b > 50){
+          window.frames[1].scrollTo(0, 50);
+        }
+        else{
+          window.frames[1].scrollTo(0, 0);
+        }
+        return obj;
       }
       
       
       function scroll(){
-      target = document.getElementById('btn');
-      //window.scrollTo(0,20);
-      //window.location.replace("#top");
-      //window.scrollIntoView();
-      //document.getElementById("koko").scrollIntoView(true);
-      window.frames[1].scrollTo(getScrollPosition().a, getScrollPosition().b);
-      
+        target = document.getElementById('btn');
+        //window.scrollTo(0,20);
+        //window.location.replace("#top");
+        //window.scrollIntoView();
+        //document.getElementById("koko").scrollIntoView(true);
+        window.frames[1].scrollTo(getScrollPosition().a, getScrollPosition().b);
       } 
       
       setPosition();
