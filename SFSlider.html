@@ -13,26 +13,82 @@ y <input type="text" value="" name="scrollY" /><br>
 a <input type="text" value="" name="scrollA" /><br>
 b <input type="text" value="" name="scrollB" />
 </form> 
+
+
+<form action="" method="" id="mouseposition"> 
+<ul> 
+<li>mouseX: <input type="text" value="" name="onmouseX" /></li> 
+<li>mouseY: <input type="text" value="" name="onmouseY" /></li> 
+</ul> 
+</form> 
+
 <button onclick="scroll()">スクロール</button>
+<button onclick="mousedown()">aa</button>
 <br>
 
 
 <br><br>
-<iframe id="menu" src="menu.html" width=18%>
-iframe対応ブラウザでみてください
+<iframe id="menu" src="menu.html" height="400" width=18% onmousedown=console.log("wow")>
+  iframe対応ブラウザでみてください
 </iframe>
 
-<iframe id="content" src="content.html" width=80%>
-この部分は iframe 対応のブラウザで見てください。
+<iframe id="content" src="content.html" height="400"  width=80%>
+  この部分は iframe 対応のブラウザで見てください。
 </iframe>
 
 
 
+<script>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-<script> 
+function getMousePosition(e) {
+var ms = new Object();
  
+if(e) {
+  ms.x = e.pageX;
+  ms.y = e.pageY;
+}
+else {
+  ms.x = event.x + document.body.scrollLeft;
+  ms.y = event.y + document.body.scrollTop;
+}
+ 
+return ms;
+}
+
+
+function setMousePosition(){
+  mouseposition = document.getElementById('mouseposition');
+  frames[0].onmousedown = function(e){
+    mouseposition.onmouseX.value = getMousePosition(e).x;
+    mouseposition.onmouseY.value = getMousePosition(e).y;
+  }
+}
+
+setMousePosition();
+
+
+function getMS(theEvent){ console.log("マウスのボタンがクリックされたよ");}
+window.captureEvents(Event.CLICK);
+frames[0].onclick = getMS;
+
+//window.onMouseUp = alert("hah");
+//Window.onClick = alert("click");
+//window.onMouseUp = mouseup();
+//window.onMouseDown = mousedown();
+//frames[0].onMouseDown = mousedown();
+//frames[0].onMouseUp = mouseup();
+//window.onMouseOver = mousedown;
+function mousedown(){
+// alert("mousedown event detected!");
+ console.log("aa");
+}
+
+function mouseup(){
+// alert("mouse up!");
+ console.log("bb");
+}
+
+
 function setPosition() {
 	target = document.getElementById('position');
 	
@@ -52,8 +108,8 @@ function getScrollPosition() {
 	obj.y = document.documentElement.scrollTop  || document.body.scrollTop;
 	obj.a = frames[0].document.documentElement.scrollLeft || frames[0].document.body.scrollLeft;
 	obj.b = frames[0].document.documentElement.scrollTop  || frames[0].document.body.scrollTop;
-        if(obj.b > 100){
-          window.frames[1].scrollTo(0, 100);
+        if(obj.b > 50){
+          window.frames[1].scrollTo(0, 50);
         }
         else{
           window.frames[1].scrollTo(0, 0);
@@ -73,7 +129,6 @@ function scroll(){
 } 
  
 setPosition();
- 
 
 </script> 
 </body> 
