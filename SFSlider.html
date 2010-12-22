@@ -20,10 +20,11 @@
       </ul> 
     </form> 
 
-    <br>
+    <iframe id="menu" src="menu.html" height="400" width=15% scrolling="no">
+    </iframe>
 
-    <iframe id="menu" src="menu.html" height="400" width=18%>
-      iframe対応ブラウザでみてください
+    <iframe id="outline" src="outline.html" height="400" width=2% frameborder="0">
+      iframe非対応
     </iframe>
 
     <iframe id="content" src="content.html" height="400"  width=80%>
@@ -33,6 +34,8 @@
 
 
     <script>
+      var click = 0;
+      var scroll = 0;
 
       function getMousePosition(e) {      // マウスカーソル位置
         var mouse = new Object();      
@@ -45,15 +48,23 @@
         return mouse;
       }
 
-
-      function getMouseDownPosition(){  // クリック位置(スクロールスタート位置)
-
+      
+      function setPosition() {
+        target = document.getElementById('position');
+      
+        target.scrollY.value    = getScrollPosition().y;
+        target.scrollB.value    = getScrollPosition().b;
+      
+        setTimeout( function(){setPosition()},50 );
       }
 
-      function setMouseDownPosition(){
+
+      function setMouseDownPosition(){  // クリック位置(スクロールスタート位置)
         mouseposition = document.getElementById('mouseposition');
-        frames[0].onmousedown = function(e){
+      
+        frames[1].onmousedown = function(e){
           mouseposition.mousedownY.value = getMousePosition(e).y;
+          click = getMousePosition(e).y;
         }
       }      
       setMouseDownPosition();
@@ -61,14 +72,37 @@
 
       function setScroll(){
         mouseposition = document.getElementById('mouseposition');
-        frames[0].onmousemove = function(e){
+        frames[1].onmousemove = function(e){
           mouseposition.onmouseY.value = getMousePosition(e).y;
-          mouseposition.scroll.value = getMousePosition(e).y - 5;
+          mouseposition.scroll.value = getMousePosition(e).y - click;
+          scroll = getMousePosition(e).y - click;
+          if(scroll < 0){
+	    console.log("minus");
+//            window.frames[1].scrollTo(0, 0);
+//	      window.frames[1].location.href = "content.html#bb";
+//            window.frames[0].frames[0].location.href = "menu.html#no";
+          }
         }
       }
       setScroll();
-    
       
+      if(scroll > 0){
+        console.log(scroll);
+      }
+      
+
+      function resetScroll(){
+       frames[1].onmouseup = function(e){
+          scroll = 0;
+          console.log(scroll);
+        }
+        window.onmouseup = function(e){
+          scroll = 0;
+          console.log(scroll);
+        }
+      }
+      resetScroll();
+
       function setPosition() {
         target = document.getElementById('position');
       
@@ -79,14 +113,18 @@
       }
       
 
-// スクロールバーの位置を取得(フレーム外とフレーム内)
-      function getScrollPosition() {
+      function getScrollPosition() { // スクロールバーの位置を取得(フレーム外とフレーム内)
         var obj = new Object();
       
         obj.y = document.documentElement.scrollTop  || document.body.scrollTop;
-        obj.b = frames[0].document.documentElement.scrollTop  || frames[0].document.body.scrollTop;
+        obj.b = frames[1].document.documentElement.scrollTop  || frames[1].document.body.scrollTop;
+	window.frames[0].scrollTo(0, obj.b);
         if(obj.b % 10 == 0){
-          window.frames[1].scrollTo(0, obj.b);
+          window.frames[2].scrollTo(0, obj.b);
+//	  window.frames[0].scrollTo(0, obj.b);
+//	  window.frames[0].scrollTo(0, obj.b);
+//	  window.frames[0].location.href = "menu.html#no";
+//	  window.frames[0].location.replace("menu.html#top");
         }
         return obj;
       }
@@ -104,5 +142,7 @@
       setPosition();
 
     </script> 
+
+
   </body> 
 </html> 
