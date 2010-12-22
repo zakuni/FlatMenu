@@ -15,13 +15,14 @@
     <form action="" method="" id="mouseposition"> 
       <ul> 
 	<li>mousedownY: <input type="text" value="" name="mousedownY" /></li> 
-	<li>mouseY: <input type="text" value="" name="onmouseY" /></li> 	
+	<li>mouseY: <input type="text" value="" name="onmouseY" /></li> 
+	<li>scroll: <input type-"text" value="" name="scroll" /></li>
       </ul> 
     </form> 
 
     <br>
 
-    <iframe id="menu" src="menu.html" height="400" width=18% onmousedown=console.log("wow")>
+    <iframe id="menu" src="menu.html" height="400" width=18%>
       iframe対応ブラウザでみてください
     </iframe>
 
@@ -33,9 +34,7 @@
 
     <script>
 
-
-// マウスカーソル位置
-      function getMousePosition(e) {
+      function getMousePosition(e) {      // マウスカーソル位置
         var mouse = new Object();      
           if(e) {
             mouse.y = e.pageY;
@@ -47,8 +46,10 @@
       }
 
 
+      function getMouseDownPosition(){  // クリック位置(スクロールスタート位置)
 
-// クリック位置(スクロールスタート位置)
+      }
+
       function setMouseDownPosition(){
         mouseposition = document.getElementById('mouseposition');
         frames[0].onmousedown = function(e){
@@ -56,21 +57,16 @@
         }
       }      
       setMouseDownPosition();
-      
+
 
       function setScroll(){
         mouseposition = document.getElementById('mouseposition');
         frames[0].onmousemove = function(e){
           mouseposition.onmouseY.value = getMousePosition(e).y;
+          mouseposition.scroll.value = getMousePosition(e).y - 5;
         }
       }
       setScroll();
-      
-
-      function resetScroll(){
-        scrollX = 0;
-        scrollY = 0;
-      }
     
       
       function setPosition() {
