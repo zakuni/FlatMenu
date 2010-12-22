@@ -8,7 +8,6 @@
   <body>
 
     <form id="position"> 
-      y <input type="text" value="" name="scrollY" /><br>
       b <input type="text" value="" name="scrollB" />
     </form> 
 
@@ -36,6 +35,9 @@
     <script>
       var click = 0;
       var scroll = 0;
+      menu = window.frames[0];
+      scrollbar = window.frames[1];
+      content = window.frames[2];
 
       function getMousePosition(e) {      // マウスカーソル位置
         var mouse = new Object();      
@@ -78,18 +80,11 @@
           scroll = getMousePosition(e).y - click;
           if(scroll < 0){
 	    console.log("minus");
-//            window.frames[1].scrollTo(0, 0);
-//	      window.frames[1].location.href = "content.html#bb";
-//            window.frames[0].frames[0].location.href = "menu.html#no";
           }
         }
       }
       setScroll();
-      
-      if(scroll > 0){
-        console.log(scroll);
-      }
-      
+         
 
       function resetScroll(){
        frames[1].onmouseup = function(e){
@@ -106,38 +101,26 @@
       function setPosition() {
         target = document.getElementById('position');
       
-        target.scrollY.value    = getScrollPosition().y;
         target.scrollB.value    = getScrollPosition().b;
       
-        setTimeout( function(){setPosition()},50 );
+        setTimeout( function(){setPosition()},20 );
       }
       
 
       function getScrollPosition() { // スクロールバーの位置を取得(フレーム外とフレーム内)
         var obj = new Object();
       
-        obj.y = document.documentElement.scrollTop  || document.body.scrollTop;
         obj.b = frames[1].document.documentElement.scrollTop  || frames[1].document.body.scrollTop;
 	window.frames[0].scrollTo(0, obj.b);
-        if(obj.b % 10 == 0){
-          window.frames[2].scrollTo(0, obj.b);
-//	  window.frames[0].scrollTo(0, obj.b);
-//	  window.frames[0].scrollTo(0, obj.b);
-//	  window.frames[0].location.href = "menu.html#no";
-//	  window.frames[0].location.replace("menu.html#top");
+	if(obj.b == 0)
+	  menu.location.replace("menu.html#a");  // 「あ」
+	else if(obj.b == 964)
+	  menu.location.replace("menu.html#wa"); // 「わ」
+	else if(obj.b % 10 == 0){
+          content.scrollTo(0, obj.b);
         }
         return obj;
       }
-      
-      
-      function scroll(){
-        target = document.getElementById('btn');
-        //window.scrollTo(0,20);
-        //window.location.replace("#top");
-        //window.scrollIntoView();
-        //document.getElementById("koko").scrollIntoView(true);
-        window.frames[1].scrollTo(getScrollPosition().a, getScrollPosition().b);
-      } 
       
       setPosition();
 
