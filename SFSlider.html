@@ -57,7 +57,7 @@
         target.scrollY.value    = getScrollPosition().y;
         target.scrollB.value    = getScrollPosition().b;
       
-        setTimeout( function(){setPosition()},50 );
+        setTimeout( function(){setPosition()},30 );
       }
 
 
@@ -103,7 +103,7 @@
       
         target.scrollB.value    = getScrollPosition().b;
       
-        setTimeout( function(){setPosition()},20 );
+        setTimeout( function(){setPosition()}, 50);
       }
       
 
@@ -111,12 +111,28 @@
         var obj = new Object();
       
         obj.b = frames[1].document.documentElement.scrollTop  || frames[1].document.body.scrollTop;
-	window.frames[0].scrollTo(0, obj.b);
-	if(obj.b == 0)
+//	window.frames[0].scrollTo(0, obj.b);
+	if(obj.b < 130){
 	  menu.location.replace("menu.html#a");  // 「あ」
-	else if(obj.b == 964)
+	}else if(130 < obj.b && obj.b < 250){
+	  menu.location.replace("menu.html#ka"); // 「か」
+        }else if(253 < obj.b && obj.b < 400){
+	  menu.location.replace("menu.html#sa"); // 「さ」
+	}else if(402 < obj.b && obj.b < 550){
+	  menu.location.replace("menu.html#ta"); // 「た」
+        }else if(551 < obj.b && obj.b < 670){
+	  menu.location.replace("menu.html#na"); // 「な」
+        }else if(679 < obj.b && obj.b < 800){
+          menu.location.replace("menu.html#ha"); // 「は」
+        }else if(804 < obj.b && obj.b < 950){
+          menu.location.replace("menu.html#ma"); // 「ま」
+        }else if(953 < obj.b && obj.b < 1060){
+          menu.location.replace("menu.html#ya"); // 「や」
+        }else if(1067 < obj.b && obj.b < 1180){
+          menu.location.replace("menu.html#ra"); // 「ら」
+  	}else if(1180 < obj.b){
 	  menu.location.replace("menu.html#wa"); // 「わ」
-	else if(obj.b % 10 == 0){
+	}else if(obj.b % 10 == 0){
           content.scrollTo(0, obj.b);
         }
         return obj;
