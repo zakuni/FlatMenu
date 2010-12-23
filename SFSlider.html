@@ -8,15 +8,15 @@
   <body>
 
     <form id="position"> 
-      a <input type="text" value="" name="scrollA" />
-      b <input type="text" value="" name="scrollB" />
+      左位置 <input type="text" value="" name="scrollA" />
+      バー位置 <input type="text" value="" name="scrollB" />
     </form> 
 
     <form action="" method="" id="mouseposition"> 
       <ul> 
-	<li>mousedownY: <input type="text" value="" name="mousedownY" /></li> 
-	<li>mouseY: <input type="text" value="" name="onmouseY" /></li> 
-	<li>scroll: <input type-"text" value="" name="scroll" /></li>
+	<li>クリック: <input type="text" value="" name="mousedownY" /></li> 
+	<li>マウス位置: <input type="text" value="" name="onmouseY" /></li> 
+	<li>スクロール量: <input type-"text" value="" name="scroll" /></li>
       </ul> 
     </form> 
 
@@ -42,127 +42,125 @@
       mode = 0;
       var row = "a", column = "a";
 
-      function getMousePosition(e) {      // マウスカーソル位置
+      var aiueoNow = 0;   // 現在位置(行)
+      var akasatanaNow = 0;  // 現在位置(列)
+
+      var a = 0, i = 284, u = 559, e = 853, o = 1128, 
+          ka = 508,
+          sa = 1008,
+          ta = 1583,
+          na = 2108,
+          ha = 2608,
+          ma = 3133,
+          ya = 3658,
+          ra = 3983,
+          wa = 4483;
+
+      var aiueo = new Array("#a", "#i", "#u", "#e", "#o");
+      var akasatana = new Array("#a", "#ka", "#sa", "#ta", "#na", "#ha", "#ma", "#ya", "#ra", "#wa");
+
+
+      function getMousePosition(e) {      // マウスカーソル位置取得
         var mouse = new Object();      
-          if(e) {
-            mouse.y = e.pageY;
-          }
+        if(e) {
+          mouse.y = e.pageY;
+        }
         else {
           mouse.y = event.y + document.body.scrollTop;
         }      
         return mouse;
       }
 
+
+      function setPosition() {                         //スクロール位置を表示
+          target = document.getElementById('position');
       
-      function setPosition() {
-        target = document.getElementById('position');
+	  target.scrollA.value    = getScrollPosition().a;
+	  target.scrollB.value    = getScrollPosition().b;
       
-        target.scrollY.value    = getScrollPosition().y;
-        target.scrollB.value    = getScrollPosition().b;
-      
-        setTimeout( function(){setPosition()},30 );
+	  setTimeout( function(){setPosition()}, 50);
       }
 
 
       function setMouseDownPosition(){  // クリック位置(スクロールスタート位置)
         mouseposition = document.getElementById('mouseposition');
       
-        frames[1].onmousedown = function(e){
-          mouseposition.mousedownY.value = getMousePosition(e).y;
+        scrollbar.onmousedown = function(e){
+          mouseposition.mousedownY.value = getMousePosition(e).y; // クリック位置セット
           click = getMousePosition(e).y;
         }
       }      
-      setMouseDownPosition();
-
 
       function setScroll(){
         mouseposition = document.getElementById('mouseposition');
-        frames[1].onmousemove = function(e){
-          mouseposition.onmouseY.value = getMousePosition(e).y;
-          mouseposition.scroll.value = getMousePosition(e).y - click;
+        scrollbar.onmousemove = function(e){
+          mouseposition.onmouseY.value = getMousePosition(e).y;  // マウス位置セット
+
           scroll = getMousePosition(e).y - click;
-          if(-500 < scroll && scroll < 500){
+          mouseposition.scroll.value = scroll;  // スクロール量セット
+
+          if(-100 < scroll && scroll < 100){
 	    mode = 0;
 	  }
-	  else if( (-1300 < scroll && scroll < -500) || (500 < scroll && scroll < 1300) ){
+	  else if( (-500 < scroll && scroll < -100) || (100 < scroll && scroll < 500) ){
             mode = 1;
           }
-          else if(scroll < -1300 || 1300 < scroll){
+          else if(scroll < -500 || 500 < scroll){
             mode = 2;
           }
         }
       }
-      setScroll();
          
 
       function resetScroll(){
-       frames[1].onmouseup = function(e){
-          scroll = 0;
-          console.log(scroll);
-        }
-        window.onmouseup = function(e){
-          scroll = 0;
-          console.log(scroll);
-        }
+	  frames[1].onmouseup = function(e){
+              scroll = 0;
+          }
+          window.onmouseup = function(e){
+              scroll = 0;
+          }
       }
-      resetScroll();
 
-      function setPosition() {
-        target = document.getElementById('position');
-      
-	target.scrollA.value    = getScrollPosition().a;
-	target.scrollB.value    = getScrollPosition().b;
-      
-        setTimeout( function(){setPosition()}, 50);
-      }
-      
+
+	function nextAiueo(i){
+	  if(aiueo[i+1] == null){
+            console.log("null");
+          }
+	    menu.location.replace("menu.html"+ aiueo[i+1]);
+	}
+
+	function backAiueo(i){
+	  menu.location.replace("menu.html"+ aiueo[i-1]);
+	}
+	
 
       function getScrollPosition() { // スクロールバーの位置を取得(フレーム外とフレーム内)
         var obj = new Object();
-        var a = 0, i = 284, u = 559, e = 853, o = 1128, 
-            ka = 1404,
-            sa = 2429,
-            ta = 2635,
-            na = 2781,
-            ha = 2910,
-            ma = 3060,
-            ya = 3206,
-            ra = 3310,
-            wa = 3436;
-
-　　　　var aiueo = new Array(a, b, c, d, e);
-	var akasatana = new Array(a, ka, sa, ta, na, ha, ma, ya, ra, wa);
 
 	obj.a = frames[0].document.documentElement.scrollTop  || frames[0].document.body.scrollTop;
         obj.b = frames[1].document.documentElement.scrollTop  || frames[1].document.body.scrollTop;
-	if(mode == 0){
+
+	if(mode == 0 || mode == 1){
           window.frames[0].scrollTo(0, obj.b);
 	}
-	else if(mode == 1){
-          if(obj.b < i && column != "a"){                           // 「あ」
-	    menu.location.replace("menu.html#a");
-//	    column = "a";
-	  }else if(i < obj.b && obj.b < u && column != "i"){        // 「い」
-	    menu.location.replace("menu.html#i");
-//	    column = "i";
-          }else if(u < obj.b && obj.b < e && column != "u"){        // 「う」
-	    menu.location.replace("menu.html#u");
-//	    column = "u";
-	  }else if(e < obj.b && obj.b < o && column != "e"){        // 「え」
-	    menu.location.replace("menu.html#e");
-//	    column = "e";
-          }else if(o < obj && column != "o"){                       // 「お」
-            menu.location.replace("menu.html#o");
-//	    column = "o";
+	else if(mode == 3){
+          if(obj.b < i){                           // 「あ」
+	    menu.location.replace("menu.html"+ aiueo[0]);
+	  }else if(i < obj.b && obj.b < u){        // 「い」
+	    menu.location.replace("menu.html"+ aiueo[1]);
+          }else if(u < obj.b && obj.b < e){        // 「う」
+	    menu.location.replace("menu.html"+ aiueo[2]);
+	  }else if(e < obj.b && obj.b < o){        // 「え」
+	    menu.location.replace("menu.html"+ aiueo[3]);
+          }else if(o < obj){                       // 「お」
+            menu.location.replace("menu.html"+ aiueo[4]);
           }
         }
 	else if(mode == 2){
-          if(obj.b < ka && row != "a"){                          // 「あ」
+          if(obj.b < ka){                          // 「あ」
 	    menu.location.replace("menu.html#a");
-//            row = "a";
-	  }else if(ka < obj.b && obj.b < sa && row != "ka"){      // 「か」
+	  }else if(ka < obj.b && obj.b < sa){      // 「か」
 	    menu.location.replace("menu.html#ka"); 
-//	    row = "ka";
           }else if(sa < obj.b && obj.b < ta){    // 「さ」
 	    menu.location.replace("menu.html#sa"); 
 	  }else if(ta < obj.b && obj.b < na){    // 「た」
@@ -179,14 +177,18 @@
             menu.location.replace("menu.html#ra");
   	  }else if(wa < obj.b){                  // 「わ」
 	    menu.location.replace("menu.html#wa"); 
-	  }else if(obj.b % 10 == 0){
-            content.scrollTo(0, obj.b);
+//	  }else if(obj.b % 10 == 0){
+//            content.scrollTo(0, obj.b);
           }
         }
+
         return obj;
       }
       
       setPosition();
+      setMouseDownPosition();
+      setScroll();
+      resetScroll();
 
     </script> 
 
