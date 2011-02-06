@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FlatMenu</title>
+    <script src="jquery-1.4.4.js"></script>
+    <script>
+      $(function(){
+        var menuu = $("#menuu");
+
+        menuu.mousedown(function(){
+          console.log(
+            'top:' + menuu.scrollTop() + '\n' +
+            'height:' + menuu.scrollLeft()
+          );
+
+        $("#barr").scrollTop(30).scrollLeft(0);
+          });
+
+        $("#outline").scroll(function(){
+          $("#absolute").css("top",$("#outline").scrollTop());
+          $("#absolute").html($("#outline").scrollTop());
+        });
+      });
+    </script>
+  </head> 
+ 
+  <body>
+
+    <div id="menuu" style="width:100px; height:50px; overflow:auto; float:left">
+      Test content. This is a block element, in this case a DIV,
+      styled to have specific width and height,
+      and also features overflow control.
+    </div>
+
+    <div id="barr" style="width:100px; height:50px; overflow:hidden; float:left">
+      Test content. This is a block element, in this case a DIV,
+      styled to have specific width and height,
+      and also features overflow control.
+    </div>
+    <div style="clear:both">
+    </div>
+
+    <div id="absolute" style="position:absolute;"></div>
+
+    <iframe id="menu" src="menu.html" height="400" width=25% scrolling="no">
+    </iframe>
+
+    <iframe id="outline" src="outline.html" height="400" width=2% frameborder="0">
+      iframe非対応
+    </iframe>
+
+    <iframe id="content" src="content.html" height="400"  width=70%>
+      この部分は iframe 対応のブラウザで見てください。
+    </iframe>
+
+
+  </body> 
+</html> 
