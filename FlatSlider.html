@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <title>FlatSlider</title>
     <script src="jquery-1.4.4.js"></script>
-    <p id="first">変更前</p>
     <script>
       $(function(){
-        $("p#first").html("<strong>変更後</strong>");
         $("#outline").scroll(function(){
           $("#absolute").css("top",$("#outline").scrollTop());
           $("#absolute").html($("#outline").scrollTop());
@@ -33,7 +31,7 @@
     </div>
 
     <div id="absolute" style="position:absolute;"></div>
-    <a href="http://jquery.com/">jQuery</a>
+
     <form id="position"> 
       左位置 <input type="text" value="" name="scrollA" />
       バー位置 <input type="text" value="" name="scrollB" />
