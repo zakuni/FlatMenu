@@ -3,19 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>FlatMenu</title>
-    <script src="jquery-1.4.4.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script>
       $(function(){
+        var barr = $("#barr");
         var menuu = $("#menuu");
-
-        menuu.mousedown(function(){
+      
+        barr.mousedown(function(){
           console.log(
-            'top:' + menuu.scrollTop() + '\n' +
-            'height:' + menuu.scrollLeft()
-          );
+            'top:' + barr.scrollTop() + '\n' +
+            'height:' + barr.scrollLeft()
+          )
+        });
 
-        $("#barr").scrollTop(30).scrollLeft(0);
-          });
+        barr.scroll(function(){
+          console.log(
+            'nowtop:' + barr.scrollTop() + '\n' +
+            'nowheight:' + barr.scrollLeft())
+          menuu.scrollTop(barr.scrollTop())
+        });
 
         $("#outline").scroll(function(){
           $("#absolute").css("top",$("#outline").scrollTop());
@@ -27,17 +33,18 @@
  
   <body>
 
-    <div id="menuu" style="width:100px; height:50px; overflow:auto; float:left">
+    <div id="menuu" style="width:100px; height:100px; overflow:hidden; float:left; border-style:solid">
       Test content. This is a block element, in this case a DIV,
       styled to have specific width and height,
       and also features overflow control.
     </div>
-
-    <div id="barr" style="width:100px; height:50px; overflow:hidden; float:left">
+    
+    <div id="barr" style="width:15px; height:100px; overflow:auto; float:left">
       Test content. This is a block element, in this case a DIV,
       styled to have specific width and height,
       and also features overflow control.
     </div>
+    
     <div style="clear:both">
     </div>
 
