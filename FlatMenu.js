@@ -1,9 +1,11 @@
 $(function(){
     var barr = $("#barr");
     var menuu = $("#menuu");
+    var scroll_start = 0;
+    var scroll_now
 
     
-    //あかさたなの初期位置
+    // あかさたなの初期位置
     var start = new Array(10);
 
     start[0] = $('div#a').offset().top
@@ -20,20 +22,24 @@ $(function(){
     $('#position_a').text('あ: '+start[0]);
     $('#position_ka').text('か: '+start[1]);      
 
+
     barr.mousedown(function(){
-        console.log(
-            'top:' + barr.scrollTop() + '\n' +
-		'height:' + barr.scrollLeft()
-        )
+	scroll_start = barr.scrollTop()  // スクロール開始位置
+        console.log('scroll_start:' + scroll_start)
     });
 
     barr.scroll(function(){
-        console.log(
-            'nowtop:' + barr.scrollTop() + '\n' +
-		'nowheight:' + barr.scrollLeft())
-        menuu.scrollTop(barr.scrollTop())
-        $('#out').text('scrollTop: '+$(this).scrollTop());
+	scroll_now = barr.scrollTop()  // 現在のスクロール位置
+        console.log('scroll_now:' + scroll_now)
+
+	scroll_amount = scroll_now - scroll_start // スクロール量
+	console.log(scroll_amount)
+
+	if(scroll_amount != 0){
+            menuu.scrollTop(scroll_now)
+	}
+	
         $('#position_a').text('あ: '+$('div#a').offset().top);
         $('#position_ka').text('か: '+$('div#ka').offset().top);
     });
-});  //$(function())
+});
