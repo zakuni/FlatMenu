@@ -20,14 +20,14 @@
       </ul> 
     </form> 
 
-    <iframe id="menu" src="menu.html" height="400" width=15% scrolling="no">
+    <iframe id="menu" src="menu.html" height="400" width=25% scrolling="no">
     </iframe>
 
     <iframe id="outline" src="outline.html" height="400" width=2% frameborder="0">
       iframe非対応
     </iframe>
 
-    <iframe id="content" src="content.html" height="400"  width=80%>
+    <iframe id="content" src="content.html" height="400"  width=70%>
       この部分は iframe 対応のブラウザで見てください。
     </iframe>
 
@@ -95,7 +95,6 @@
         mouseposition = document.getElementById('mouseposition');
         scrollbar.onmousemove = function(e){
           mouseposition.onmouseY.value = getMousePosition(e).y;  // マウス位置セット
-
           scroll = getMousePosition(e).y - click;
           mouseposition.scroll.value = scroll;  // スクロール量セット
 

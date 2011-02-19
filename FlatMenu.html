@@ -22,8 +22,13 @@
             'nowheight:' + barr.scrollLeft())
           menuu.scrollTop(barr.scrollTop())
           $('#out').text('scrollTop: '+$(this).scrollTop());
+<<<<<<< HEAD
           $('#position_a').text('あ: '+$('div#a').offset().top);
           $('#position_ka').text('か: '+$('div#ka').offset().top);
+=======
+          $('#out2').text('scrollTop: '+$('#menuu').scrollTop());
+          $('#out3').text('scrollTop: '+$(this).scrollTop());
+>>>>>>> jquery
         });
       });
     </script>
@@ -31,8 +36,13 @@
  
   <body>
     <p id="out">scrollTop: </p>
+<<<<<<< HEAD
     <p id="position_a">あ: </p>
     <p id="position_ka">か: </p>
+=======
+    <p id="out2">scrollTop: </p>
+    <p id="out3">scrollTop: </p>
+>>>>>>> jquery
     <div id="menuu" style="width:25%; height:100px; overflow:hidden; float:left; border-style:solid; border-width: 1px">
       <div id="a">あ</div>
       <div id="ka">か</div>
