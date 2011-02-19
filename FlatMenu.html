@@ -21,17 +21,21 @@
             'nowtop:' + barr.scrollTop() + '\n' +
             'nowheight:' + barr.scrollLeft())
           menuu.scrollTop(barr.scrollTop())
+          $('#out').text('scrollTop: '+$(this).scrollTop());
+          $('#out2').text('scrollTop: '+$('#menuu').scrollTop());
+          $('#out3').text('scrollTop: '+$(this).scrollTop());
         });
-
       });
     </script>
   </head> 
  
   <body>
-
-    <div id="menuu" style="width:25%; height:100px; overflow:hidden; float:left; border-style:solid">
-      あ<br>
-      か<br>
+    <p id="out">scrollTop: </p>
+    <p id="out2">scrollTop: </p>
+    <p id="out3">scrollTop: </p>
+    <div id="menuu" style="width:25%; height:100px; overflow:hidden; float:left; border-style:solid; border-width: 1px">
+      <div id="a">あ</div>
+      <div id="ka">か</div>
       さ<br>
       た<br>
       な<br>
@@ -47,7 +51,7 @@
       styled to have specific width and height,
       and also features overflow control.
     </div>
-    <div id="nakami" style="width:72%; border-style:solid; float:left">
+    <div id="nakami" style="width:72%; border-style:solid; float:left; border-width: 1px">
       a
     </div>
     <div style="clear:both">
