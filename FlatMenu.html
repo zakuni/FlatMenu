@@ -8,8 +8,21 @@
       $(function(){
         var barr = $("#barr");
         var menuu = $("#menuu");
-        $('#position_a').text('あ: '+$('div#a').offset().top);
-        $('#position_ka').text('か: '+$('div#ka').offset().top);      
+
+        //あかさたなの初期位置
+        var a_start = $('div#a').offset().top
+        var ka_start = $('div#ka').offset().top
+        var sa_start = $('div#sa').offset().top
+        var ta_start = $('div#ta').offset().top
+        var na_start = $('div#na').offset().top
+        var ha_start = $('div#ha').offset().top
+        var ma_start = $('div#ma').offset().top
+        var ya_start = $('div#ya').offset().top
+        var ra_start = $('div#ra').offset().top
+        var wa_start = $('div#wa').offset().top      
+
+        $('#position_a').text('あ: '+a_start);
+        $('#position_ka').text('か: '+ka_start);      
 
         barr.mousedown(function(){
           console.log(
@@ -33,19 +46,19 @@
  
   <body>
     <p id="out">scrollTop: </p>
-    <p id="position_a">あ: </p>
-    <p id="position_ka">か: </p>
+    <div id="position_a">あ: </div>
+    <div id="position_ka">か: </div>
     <div id="menuu" style="width:25%; height:100px; overflow:hidden; float:left; border-style:solid; border-width: 1px">
       <div id="a">あ</div>
       <div id="ka">か</div>
-      さ<br>
-      た<br>
-      な<br>
-      は<br>
-      ま<br>
-      や<br>
-      ら<br>
-      わ<br>
+      <div id="sa">さ</div>
+      <div id="ta">た</div>
+      <div id="na">な</div>
+      <div id="ha">は</div>
+      <div id="ma">ま</div>
+      <div id="ya">や</div>
+      <div id="ra">ら</div>
+      <div id="wa">わ</div>
     </div>
     
     <div id="barr" style="width:15px; height:100px; overflow:auto; float:left">
