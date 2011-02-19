@@ -2,7 +2,7 @@ $(function(){
     var barr = $("#barr");
     var menuu = $("#menuu");
     var scroll_start = 0;
-    var scroll_now
+    var scroll_now;
 
     
     // あかさたなの初期位置
@@ -17,26 +17,38 @@ $(function(){
     start[6] = $('div#ma').offset().top
     start[7] = $('div#ya').offset().top
     start[8] = $('div#ra').offset().top
-    start[9] = $('div#wa').offset().top      
+    start[9] = $('div#wa').offset().top    
 
     $('#position_a').text('あ: '+start[0]);
     $('#position_ka').text('か: '+start[1]);      
 
 
     barr.mousedown(function(){
-	scroll_start = barr.scrollTop()  // スクロール開始位置
-        console.log('scroll_start:' + scroll_start)
+	scroll_start = barr.scrollTop();  // スクロール開始位置
+        console.log('scroll_start:' + scroll_start);
     });
 
     barr.scroll(function(){
 	scroll_now = barr.scrollTop()  // 現在のスクロール位置
-        console.log('scroll_now:' + scroll_now)
+        console.log('scroll_now:' + scroll_now);
 
 	scroll_amount = scroll_now - scroll_start // スクロール量
-	console.log(scroll_amount)
+	console.log('scroll_amount:' + scroll_amount);
 
-	if(scroll_amount != 0){
-            menuu.scrollTop(scroll_now)
+	if(scroll_amount > 100){
+	    // 一つ後のあかさたな要素までスナップ
+	    $(start).each(
+		function(i){
+		    if(scroll_now < start[i]){
+			console.log(start[i+1]);
+			menuu.scrollTop(start[i+1]);
+			return false; // breakの代わりにこう書く
+		    }
+		}
+	    );
+	}
+	else if(scroll_amount != 0){
+            menuu.scrollTop(scroll_now);
 	}
 	
         $('#position_a').text('あ: '+$('div#a').offset().top);
