@@ -9,20 +9,23 @@
         var barr = $("#barr");
         var menuu = $("#menuu");
 
+      
         //あかさたなの初期位置
-        var a_start = $('div#a').offset().top
-        var ka_start = $('div#ka').offset().top
-        var sa_start = $('div#sa').offset().top
-        var ta_start = $('div#ta').offset().top
-        var na_start = $('div#na').offset().top
-        var ha_start = $('div#ha').offset().top
-        var ma_start = $('div#ma').offset().top
-        var ya_start = $('div#ya').offset().top
-        var ra_start = $('div#ra').offset().top
-        var wa_start = $('div#wa').offset().top      
+        var start = new Array(10);
 
-        $('#position_a').text('あ: '+a_start);
-        $('#position_ka').text('か: '+ka_start);      
+        start[0] = $('div#a').offset().top
+        start[1] = $('div#ka').offset().top
+        start[2] = $('div#sa').offset().top
+        start[3] = $('div#ta').offset().top
+        start[4] = $('div#na').offset().top
+        start[5] = $('div#ha').offset().top
+        start[6] = $('div#ma').offset().top
+        start[7] = $('div#ya').offset().top
+        start[8] = $('div#ra').offset().top
+        start[9] = $('div#wa').offset().top      
+
+        $('#position_a').text('あ: '+start[0]);
+        $('#position_ka').text('か: '+start[1]);      
 
         barr.mousedown(function(){
           console.log(
