@@ -19,6 +19,8 @@ $(function(){
     start[8] = $('div#ra').offset().top
     start[9] = $('div#wa').offset().top    
 
+    var start_reverse = $($(start).get().reverse()); // startを逆順にした配列
+  
     $('#position_a').text('あ: '+start[0]);
     $('#position_ka').text('か: '+start[1]);      
 
@@ -35,14 +37,26 @@ $(function(){
 	scroll_amount = scroll_now - scroll_start // スクロール量
 	console.log('scroll_amount:' + scroll_amount);
 
+	// 一つ後のあかさたな要素までスナップ
 	if(scroll_amount > 100){
-	    // 一つ後のあかさたな要素までスナップ
 	    $(start).each(
 		function(i){
 		    if(scroll_now < start[i]){
 			console.log(start[i+1]);
 			menuu.scrollTop(start[i+1]);
 			return false; // breakの代わりにこう書く
+		    }
+		}
+	    );
+	}
+	// 一つ前のあかさたな要素までスナップ
+	else if(scroll_amount < -100){
+	    start_reverse.each(
+		function(i){
+		    if(scroll_now > start_reverse[i]){
+			console.log(start_reverse[i+1]);
+			menuu.scrollTop(start_reverse[i+1]);
+			return false;
 		    }
 		}
 	    );
