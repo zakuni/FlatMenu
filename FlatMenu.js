@@ -4,6 +4,15 @@ $(function(){
     var scroll_start = 0;
     var scroll_now = 0;
 
+    var data = [
+	{"item": "論文", "yomi":"ra", "link": "http://masui.sfc.keio.ac.jp"},
+	{"item": "説明", "yomi":"sa", "link": "http://masui.sfc.keio.ac.jp"}
+    ]
+
+    for(var i in data){
+	$("#" + data[i].yomi).append("<br><a href='" + data[i].link + "'>" + data[i].item + "</a>");
+}
+
     var menu_position = $('div#menuu').offset().top
     // あかさたなの初期位置
     var start = new Array(10);
@@ -21,24 +30,20 @@ $(function(){
 
     var start_reverse = $($(start).get().reverse()); // startを逆順にした配列
 
+    
     barr.mousedown(function(){
 	scroll_start = barr.scrollTop();  // スクロール開始位置
-        console.log('scroll_start:' + scroll_start);
     });
 
     barr.scroll(function(){
 	scroll_now = barr.scrollTop()  // 現在のスクロール位置
-        console.log('scroll_now:' + scroll_now);
-
 	scroll_amount = scroll_now - scroll_start // スクロール量
-	console.log('scroll_amount:' + scroll_amount);
 
 	// 一つ後のあかさたな要素までスナップ
 	if(scroll_amount > 200){
 	    $(start).each(
 		function(i){
 		    if(scroll_now < start[i]){
-			console.log(start[i+1]);
 			menuu.scrollTop(start[i+1] - menu_position);
 			return false; // breakの代わりにこう書く
 		    }
@@ -50,13 +55,13 @@ $(function(){
 	    $(start_reverse).each(
 		function(i){
 		    if(scroll_now > start_reverse[i]){
-			console.log(start_reverse[i+1]);
 			menuu.scrollTop(start_reverse[i+1] - menu_position);
 			return false;
 		    }
 		}
 	    );
 	}
+	// 普通にスクロール
 	else if(scroll_amount != 0){
             menuu.scrollTop(scroll_now);
 	}
