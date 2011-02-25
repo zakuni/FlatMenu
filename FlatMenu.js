@@ -4,46 +4,43 @@ $(function(){
     var scroll_start = 0;
     var scroll_now = 0;
 
-    var data = [
-	{"item": "SnapScroll", "yomi":"a-z", "link": "http://pitecan.com"},
-	{"item": "FlatMenu", "yomi":"a-z", "link": "http://pitecan.com"},
-	{"item": "About", "yomi":"a-z", "link": "http://pitecan.com"},
-	{"item": "論文", "yomi":"ra", "link": "http://masui.sfc.keio.ac.jp/pub/zakuni_interaction2011_paper.pdf"},
-	{"item": "説明", "yomi":"sa", "link": "http://masui.sfc.keio.ac.jp"},
-	{"item": "ソース", "yomi":"sa", "link": "https://github.com/zakuni/FlatMenu"},
-	{"item": "さがす", "yomi":"sa", "link": "https://github.com/zakuni/FlatMenu"}
-    ]
 
     function SortByName(x,y) {
       return ((x.item == y.item) ? 0 : ((x.item > y.item) ? 1 : -1 ));
     }
 
-    // Call Sort By Name
-    data.sort(SortByName);
 
-    for(var i in data){
-	$("#" + data[i].yomi).append("<li><a href='" + data[i].link + "'>" + data[i].item + "</a></li>");
-}
-
-
-    var menu_position = $('div#menuu').offset().top
-    // あかさたなの初期位置
+    var menu_position
     var start = new Array(11);
+    var start_reverse
+    
+   $.getJSON('data.json', function(data){
+	// Call Sort By Name
+	data.sort(SortByName);
 
-    start[0] = $('h3#az').offset().top
-    start[1] = $('h3#a').offset().top
-    start[2] = $('h3#k').offset().top
-    start[3] = $('h3#s').offset().top
-    start[4] = $('h3#t').offset().top
-    start[5] = $('h3#n').offset().top
-    start[6] = $('h3#h').offset().top
-    start[7] = $('h3#m').offset().top
-    start[8] = $('h3#y').offset().top
-    start[9] = $('h3#r').offset().top
-    start[10] = $('h3#w').offset().top    
+	for(var i in data){
+	    $("#" + data[i].id + " .left").append("<a href='" + data[i].link + "'>" + data[i].left + "</a><br>");
+	    $("#" + data[i].id + " .right").append("<a href='" + data[i].link + "'>" +  data[i].right +"<br>");
+	  //  $("#" + data[i].yomi).append("<li><a href='" + data[i].link + "'>" + data[i].item + "</a></li>"); // 項目をメニューに挿入
+	}
 
-    var start_reverse = $($(start).get().reverse()); // startを逆順にした配列
+	menu_position = $('div#menuu').offset().top
+	// あかさたなの初期位置
 
+	start[0] = $('div#az').offset().top
+	start[1] = $('div#a').offset().top
+	start[2] = $('h3#k').offset().top
+	start[3] = $('div#s').offset().top
+	start[4] = $('h3#t').offset().top
+	start[5] = $('h3#n').offset().top
+	start[6] = $('h3#h').offset().top
+	start[7] = $('h3#m').offset().top
+	start[8] = $('h3#y').offset().top
+	start[9] = $('div#r').offset().top
+	start[10] = $('div#w').offset().top    
+
+	start_reverse = $($(start).get().reverse()); // startを逆順にした配列
+    });
     
     barr.mousedown(function(){
 	scroll_start = barr.scrollTop();  // スクロール開始位置
@@ -81,6 +78,6 @@ $(function(){
 	}
 	
         $('#position_a').text('あ: '+$('div#a').offset().top);
-        $('#position_ka').text('か: '+$('div#ka').offset().top);
+        $('#position_ka').text('か: '+$('h3#k').offset().top);
     });
 });

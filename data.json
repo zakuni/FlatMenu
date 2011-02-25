@@ -1,0 +1,14 @@
+[
+{"item":"All-in-One", "left": "", "right":"All-in-One", "id":"az", "link":"http://pitecan.com"},
+{"item":"SnapScroll", "left": "", "right": "SnapScroll", "id":"az", "link": "http://pitecan.com"},
+{"item":"FlatMenu", "left": "", "right": "FlatMenu", "id":"az", "link": "http://pitecan.com"},
+{"item":"About", "left": "", "right": "About", "id":"az", "link": "http://pitecan.com"},
+{"item":"ろんぶん", "left":"", "right": "論文", "id":"r", "link": "http://masui.sfc.keio.ac.jp/pub/zakuni_interaction2011_paper.pdf"},
+{"right": "せつめい", "yomi":"sa", "link": "http://masui.sfc.keio.ac.jp"},
+{"right": "そーす", "yomi":"sa", "link": "https://github.com/zakuni/FlatMenu"},
+{"right": "さがす", "yomi":"sa", "link": "https://github.com/zakuni/FlatMenu"},
+{"item": "いっきにすくろーるする", "left": "", "right": "一気にスクロールする", "id":"a", "link": ""},
+{"item": "すくろーるする いっきに", "left": "一気に", "right": "スクロールする", "id":"s", "link": ""},
+{"item": "そうさほうほう", "left": "", "right": "操作方法", "id":"s", "link": ""},
+{"item": "さがす こうもくを", "left": "項目を", "right": "探す", "id":"s", "link": ""}
+]

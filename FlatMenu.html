@@ -5,23 +5,94 @@
     <title>FlatMenu</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script src="FlatMenu.js"></script>
+    <style>
+      .left {text-align:right;
+      width:50%;
+      float:left;
+      color:#555555;
+      font-size:13px;
+      line-height:30px;
+      padding:0px 1px 0px 0px;
+      }
+      
+      .right {float:left;
+      line-height:30px;
+      font-size:18px;
+      }
+      
+      .midashi {
+      text-align:center
+      }
+      
+      #az, #a, #k, #s, #t, #n, #h, #m, #y, #r, #w{width:100%;
+      }
+    </style>
   </head> 
  
   <body>
     <div id="title" align="center" style="font-size:50px; margin:10px"><b>全部入りメニュー</b></div>
     <div id="menuu" style="width:98%; height:180px; overflow:hidden; float:left; border-style:solid; border-width: 1px 0px 1px 1px">
-      <h3 id="az">A-Z</h3><ul id="a-z"></ul>
-      <h3 id="a">あ</h3><ul id="aa"></ul>
-      <h3 id="k">か</h3><ul id="ka"></ul>
-      <h3 id="s">さ</h3><ul id="sa"></ul>
-      <h3 id="t">た</h3><ul id="ta"></ul><br><br><br>
-      <h3 id="n">な</h3><ul id="na"></ul><br><br><br>
-      <h3 id="h">は</h3><ul id="ha"></ul><br><br><br>
-      <h3 id="m">ま</h3><ul id="ma"></ul><br><br><br>
-      <h3 id="y">や</h3><ul id="ya"></ul><br><br><br>
-      <h3 id="r">ら</h3><ul id="ra"></ul>
-      <h3 id="w">わ</h3><ul id="wa"></ul>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <div id="az">
+	<div class="midashi">
+	  <h3>A-Z</h3><ul id="a-z"></ul>
+	</div>
+	<div class="left"></div>
+	<div class="right"></div>
+      </div>
+
+      <div style="clear:both"></div>
+      <div id="a">
+	<div class="midashi">
+	  <h3>あ</h3>
+	</div>
+	<div class="left"></div>
+	<div class="right"></div>
+      </div>
+
+      <div style="clear:both"></div>
+      <div class="midashi">
+	<h3 id="k">か</h3><ul id="ka"></ul>
+      </div>
+
+      <div style="clear:both"></div>
+      <div id="s">
+	<div class="midashi">
+	  <h3>さ</h3><ul id="sa"></ul>
+	</div>
+	<div class="left"></div>
+	<div class="right"></div>
+      </div>
+            
+      <div style="clear:both"></div>
+      <div class="midashi">
+	<h3 id="t">た</h3><ul id="ta"></ul><br><br><br>
+      </div>
+      <div class="midashi">
+	<h3 id="n">な</h3><ul id="na"></ul><br><br><br>
+	<h3 id="h">は</h3><ul id="ha"></ul><br><br><br>
+	<h3 id="m">ま</h3><ul id="ma"></ul><br><br><br>
+	<h3 id="y">や</h3><ul id="ya"></ul><br><br><br>
+
+
+      <div style="clear:both"></div>
+      <div id="r">
+	<div class="midashi">
+	  <h3>ら</h3>
+	</div>
+	<div class="left"></div>
+	<div class="right"></div>
+      </div>	
+
+      <div style="clear:both"></div>
+      <div id="w">
+	<div class="midashi">
+	  <h3>わ</h3>
+	</div>
+	<div class="left"></div>
+	<div class="right"></div>
+      </div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      </div>
     </div>
     
     <div id="barr" style="width:15px; height:180px; overflow:auto; float:left; border-width: 1px"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
