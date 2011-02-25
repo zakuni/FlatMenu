@@ -18,10 +18,9 @@ $(function(){
 	// Call Sort By Name
 	data.sort(SortByName);
 
-	for(var i in data){
+	for(var i in data){ // 項目をメニューに挿入
 	    $("#" + data[i].id + " .left").append("<a href='" + data[i].link + "'>" + data[i].left + "</a><br>");
 	    $("#" + data[i].id + " .right").append("<a href='" + data[i].link + "'>" +  data[i].right +"<br>");
-	  //  $("#" + data[i].yomi).append("<li><a href='" + data[i].link + "'>" + data[i].item + "</a></li>"); // 項目をメニューに挿入
 	}
 
 	menu_position = $('div#menuu').offset().top
@@ -29,13 +28,13 @@ $(function(){
 
 	start[0] = $('div#az').offset().top
 	start[1] = $('div#a').offset().top
-	start[2] = $('h3#k').offset().top
+	start[2] = $('div#k').offset().top
 	start[3] = $('div#s').offset().top
-	start[4] = $('h3#t').offset().top
-	start[5] = $('h3#n').offset().top
-	start[6] = $('h3#h').offset().top
-	start[7] = $('h3#m').offset().top
-	start[8] = $('h3#y').offset().top
+	start[4] = $('div#t').offset().top
+	start[5] = $('div#n').offset().top
+	start[6] = $('div#h').offset().top
+	start[7] = $('div#m').offset().top
+	start[8] = $('div#y').offset().top
 	start[9] = $('div#r').offset().top
 	start[10] = $('div#w').offset().top    
 
@@ -76,8 +75,5 @@ $(function(){
 	else if(scroll_amount != 0){
             menuu.scrollTop(scroll_now);
 	}
-	
-        $('#position_a').text('あ: '+$('div#a').offset().top);
-        $('#position_ka').text('か: '+$('h3#k').offset().top);
     });
 });
