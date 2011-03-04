@@ -14,12 +14,12 @@ $(function(){
     var start = new Array(11);
     var start_reverse
     
-   $.getJSON('data.json', function(data){
+   $.getJSON('aozora.json', function(data){
 	// Call Sort By Name
 	data.sort(SortByName);
 
 	for(var i in data){ // 項目をメニューに挿入
-	    $("#" + data[i].id + " .left").append("<a href='" + data[i].link + "'>" + data[i].left + "</a><br>");
+	    $("#" + data[i].id + " .left").append(data[i].left + "<br>");
 	    $("#" + data[i].id + " .right").append("<a href='" + data[i].link + "'>" +  data[i].right +"<br>");
 	}
 
