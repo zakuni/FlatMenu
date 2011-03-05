@@ -10,6 +10,8 @@ if ARGV[0].nil?
   ARGV[0] = "sample.csv"
 end
 
+csv_data = ARGV[0]
+
 tagger = Igo::Tagger.new('/usr/local/share/ipadic')  # 解析用辞書のディレクトリを指定
 
 sentences = []
@@ -21,35 +23,35 @@ sentences.push('出汁のとり方')
 
 analyzed = []
 
-sentences.each{|sentence|
-  t = tagger.parse(sentence)
-#  p sentence.split(//u).length  # UTF-8の文字数を返す
-  t.each{|m|
-#    puts("#{m.surface} #{m.feature} #{m.start}")
-    analyzed.push("#{m.surface} #{m.feature} #{m.start}")
-    if(m.feature =~ /^名詞|^動詞/)
-      unless(m.start-1 < 0)
-        print sentence.split(//u)[0..m.start-1] # 名詞までの文章を表示
-        print(" ")
-        print sentence.split(//u)[m.start..sentence.split(//u).length] # 名詞以降の文章を表示
-        print("\n")
+def parse_split(tagger,sentences,analyzed)
+  sentences.each{|sentence|
+    t = tagger.parse(sentence)
+    #  p sentence.split(//u).length  # UTF-8の文字数を返す
+    t.each{|m|
+      #    puts("#{m.surface} #{m.feature} #{m.start}")
+      analyzed.push("#{m.surface} #{m.feature} #{m.start}")
+      if(m.feature =~ /^名詞|^動詞/)
+        unless(m.start-1 < 0)
+          print sentence.split(//u)[0..m.start-1] # 名詞までの文章を表示
+          print(" ")
+          print sentence.split(//u)[m.start..sentence.split(//u).length] # 名詞以降の文章を表示
+          print("\n")
+        end
       end
-    end
-#    puts("#{m.surface} #{m.feature.split(",")[0]} #{m.feature.split(",")[-2]}")
+      #    puts("#{m.surface} #{m.feature.split(",")[0]} #{m.feature.split(",")[-2]}")
+    }
+    puts sentence
   }
-  puts sentence
-}
-
-
+end
 
 menu = []
 
 #CSV.open('list_person_all_extended.csv', 'r') do |row|
-CSV.open(ARGV[0], 'r') do |row|
+CSV.open(csv_data, 'r') do |row|
 #CSV.open('safety.csv', 'r') do |row|
   if /\A[A-Za-z]/ =~ row[3]
     id = "az"
-  elsif /\Aあ/ =~ row[3]
+  elsif /\Aあ|\Aア/ =~ row[3]
     id = "a"
   elsif /\Aい/ =~ row[3]
     id = "i"
@@ -136,27 +138,9 @@ CSV.open(ARGV[0], 'r') do |row|
 end
 
 menu_sort = menu.sort
+parse_split(tagger,sentences,analyzed)
 
 
-=begin
-aozora_html = File.open("aozora.html", "w")    # 書き込み専用でファイルを開く（新規作成）
-aozora_html.puts '<html><body>'
-menu_sort.each do |elem|
-  aozora_html.write(elem[2])
-  aozora_html.print "<a href='"
-  aozora_html.write(elem[5])
-  aozora_html.print "'>"
-  aozora_html.write(elem[3])
-  aozora_html.puts "</a><br>"
-#  aozora_html.write("<a href='" + elem[5] + "'>" + elem[3] + "</a>")
-#  p elem[5]
-end
-aozora_html.puts '</body></html>'
-aozora_html.close        # ファイルクローズ
-=end
-
-
-# Get a Nokogiri::HTML:Document for the page we’re interested in...
 
 f=File.open('aozorabooks.html')
 @doc = Nokogiri::HTML(f, nil, 'UTF-8')
