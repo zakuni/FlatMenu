@@ -116,30 +116,40 @@ CSV.open(csv_data, 'r') do |row|
   else
     id2 = "az"
   end
+
+  booktitle = row[1]
+  booktitle_yomi = row[3]
+  lastname = row[15]
+  lastname_yomi = row[19]
+  firstname = row[16]
+  firstname_yomi = row[20]
+  url = row[50]
+
   
   # 作者名 + 作品名
-  menu.push([[" " + row[19] + row[20] + row[3]], # 読み(ソート用)
-             [row[15] + row[16] + " : " + row[1]], #item
+  menu.push([[" " + lastname_yomi + firstname_yomi + booktitle_yomi], # 読み(ソート用)
+             [lastname + firstname + " " + booktitle], #item
              [" "], # left
-             [" " + row[15] + row[16] + " : " + row[1]], # right
+             [" " + lastname + firstname + " : " + booktitle], # right
              [id2],# id
-             [" " + row[50]]]) # link
+             [" " + url]]) # link
   
-  
+=begin  
   # 作品名
-  menu.push([[" " + row[3] + row[19] + row[20]], # 読み(ソート用)
-             [row[1] + " : " + row[15] + row[16]], # item
-             [row[15] + row[16]], # left
-             [" " + row[1]], # right
+  menu.push([[" " + booktitle_yomi + lastname_yomi + firstname_yomi], # 読み(ソート用)
+             [booktitle + " : " + lastname + firstname], # item
+             [lastname + firstname], # left
+             [" " + booktitle], # right
              [id], # id
-             [" " + row[50]]]) # link
-  
-
+             [" " + url]]) # link
+=end  
 end
 
 menu_sort = menu.sort
-parse_split(tagger,sentences,analyzed)
 
+#menu.each do |elem|
+  parse_split(sentences,analyzed)
+#end
 
 
 f=File.open('aozorabooks.html')
