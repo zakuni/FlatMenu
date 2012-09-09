@@ -1,16 +1,15 @@
 $(function(){
     var barr = $("#barr");
     var menuu = $("#menuu");
-    var scroll_start = 0;
-    var scroll_now = 0;
+    var scroll_start_position = 0;
 
     function SortByName(x,y) {
       return ((x.item == y.item) ? 0 : ((x.item > y.item) ? 1 : -1 ));
     }
 
     var menu_position;
-    var start = new Array(11);
-    var start_reverse;
+    var snapping_points = new Array(11);
+    var reverse_snapping_points;
     
     $.getJSON('data.json', function(data){
         // Call Sort By Name
@@ -25,35 +24,35 @@ $(function(){
         menu_position = $('div#menuu').offset().top;
         
         // あかさたなの初期位置
-        start[0]  = $('div#az').offset().top;
-        start[1]  = $('div#a' ).offset().top;
-        start[2]  = $('div#k' ).offset().top;
-        start[3]  = $('div#s' ).offset().top;
-        start[4]  = $('div#t' ).offset().top;
-        start[5]  = $('div#n' ).offset().top;
-        start[6]  = $('div#h' ).offset().top;
-        start[7]  = $('div#m' ).offset().top;
-        start[8]  = $('div#y' ).offset().top;
-        start[9]  = $('div#r' ).offset().top;
-        start[10] = $('div#w' ).offset().top;    
+        snapping_points[0]  = $('div#az').offset().top;
+        snapping_points[1]  = $('div#a' ).offset().top;
+        snapping_points[2]  = $('div#k' ).offset().top;
+        snapping_points[3]  = $('div#s' ).offset().top;
+        snapping_points[4]  = $('div#t' ).offset().top;
+        snapping_points[5]  = $('div#n' ).offset().top;
+        snapping_points[6]  = $('div#h' ).offset().top;
+        snapping_points[7]  = $('div#m' ).offset().top;
+        snapping_points[8]  = $('div#y' ).offset().top;
+        snapping_points[9]  = $('div#r' ).offset().top;
+        snapping_points[10] = $('div#w' ).offset().top;    
         
-        start_reverse = $($(start).get().reverse()); // startを逆順にした配列
+        reverse_snapping_points = $($(snapping_points).get().reverse()); // startを逆順にした配列
     });
     
     barr.mousedown(function(){
-        scroll_start = barr.scrollTop();  // スクロール開始位置
+        scroll_start_position = barr.scrollTop();  // スクロール開始位置
     });
 
     barr.scroll(function(){
-        scroll_now = barr.scrollTop();  // 現在のスクロール位置
-        scroll_amount = scroll_now - scroll_start; // スクロール量
+        var current_position = barr.scrollTop();  // 現在のスクロール位置
+        var scroll_amount = current_position - scroll_start_position; // スクロール量
         
         // 一つ後のあかさたな要素までスナップ
         if(scroll_amount > 200){
-            $(start).each(
+            $(snapping_points).each(
                 function(i){
-                    if(scroll_now < start[i]){
-                        menuu.scrollTop(start[i+1] - menu_position);
+                    if(current_position < snapping_points[i]){
+                        menuu.scrollTop(snapping_points[i+1] - menu_position);
                         return false; // breakの代わりにこう書く
                     }
                 }
@@ -61,10 +60,10 @@ $(function(){
         }
         // 一つ前のあかさたな要素までスナップ
         else if(scroll_amount < -200){
-            $(start_reverse).each(
+            $(reverse_snapping_points).each(
                 function(i){
-                    if(scroll_now > start_reverse[i]){
-                        menuu.scrollTop(start_reverse[i] - menu_position);
+                    if(current_position > reverse_snapping_points[i]){
+                        menuu.scrollTop(reverse_snapping_points[i] - menu_position);
                         return false;
                     }
                 }
@@ -72,7 +71,7 @@ $(function(){
         }
         // 普通にスクロール
         else if(scroll_amount != 0){
-            menuu.scrollTop(scroll_now);
+            menuu.scrollTop(current_position);
         }
     });
 });
